@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -41,18 +42,27 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
     }
-    private void setButtonAddClickListener(){
+
+    // TODO: 08.07.2022
+    //  Найти способ заставить это работать через абстрактые методы. Ошибка:
+    //  Fragment null must be a public static class to be  properly recreated from instance state.
+    private void setButtonAddClickListener() {
         buttonAdd.setOnClickListener(view -> {
             FragmentManager manager = getSupportFragmentManager();
-            MyDialogFragment myDialogFragment = new MyDialogFragment();
-            myDialogFragment.show(manager, "myDialog");
+            new MyDialogFragment("Добавить запись") {
+                @Override void onPositiveClick() { Log.d("TEST", "Запись добавлена"); }
+                @Override void onNegativeClick() { dismiss(); }
+            }.show(manager, "myDialog");
         });
     }
-    private void setButtonDeleteClickListener(){
+
+    private void setButtonDeleteClickListener() {
         buttonDelete.setOnClickListener(view -> {
             FragmentManager manager = getSupportFragmentManager();
-            MyDialogFragment myDialogFragment = new MyDialogFragment();
-            myDialogFragment.show(manager, "myDialog");
+            new MyDialogFragment("Удалить запись") {
+                @Override void onPositiveClick() { Log.d("TEST", "Запись удалена"); }
+                @Override void onNegativeClick() { dismiss(); }
+            }.show(manager, "myDialog");
         });
     }
 
