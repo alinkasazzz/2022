@@ -26,15 +26,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         buttonAdd = findViewById(R.id.button_add);
         buttonDelete = findViewById(R.id.button_detele);
-
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        };
-
+        setButtonAddClickListener();
+        setButtonDeleteClickListener();
 
         ArrayList<String> notes = new ArrayList<>();
         notes.add("Планы");
@@ -53,11 +46,15 @@ public class MainActivity extends AppCompatActivity {
             FragmentManager manager = getSupportFragmentManager();
             MyDialogFragment myDialogFragment = new MyDialogFragment();
             myDialogFragment.show(manager, "myDialog");
-
-
         });
     }
-
+    private void setButtonDeleteClickListener(){
+        buttonDelete.setOnClickListener(view -> {
+            FragmentManager manager = getSupportFragmentManager();
+            MyDialogFragment myDialogFragment = new MyDialogFragment();
+            myDialogFragment.show(manager, "myDialog");
+        });
+    }
 
 
 }
