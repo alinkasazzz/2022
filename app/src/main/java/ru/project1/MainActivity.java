@@ -2,12 +2,11 @@ package ru.project1;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 
 import java.util.ArrayList;
@@ -17,8 +16,9 @@ import ru.project1.list.NotesAdapter;
 public class MainActivity extends AppCompatActivity {
 
     NotesAdapter adapter;
-   private Button buttonAdd;
-   private Button buttonDelete;
+    private Button buttonAdd;
+    private Button buttonDelete;
+    private MyDialogFragment dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +41,24 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
     }
-    private void setButtonAddClickListener(){
+
+    private void setButtonAddClickListener() {
         buttonAdd.setOnClickListener(view -> {
             FragmentManager manager = getSupportFragmentManager();
-            MyDialogFragment myDialogFragment = new MyDialogFragment();
-            myDialogFragment.show(manager, "myDialog");
+            dialog = new MyDialogFragment("Добавить запись")
+                    .setPositiveClick(v -> Log.d("TEST", "Запись добавлена"))
+                    .setNegativeClick(v -> dialog.dismiss());
+            dialog.show(manager, "myDialog");
         });
     }
-    private void setButtonDeleteClickListener(){
+
+    private void setButtonDeleteClickListener() {
         buttonDelete.setOnClickListener(view -> {
             FragmentManager manager = getSupportFragmentManager();
-            MyDialogFragment myDialogFragment = new MyDialogFragment();
-            myDialogFragment.show(manager, "myDialog");
+            dialog = new MyDialogFragment("Удалить запись")
+                    .setPositiveClick(v -> Log.d("TEST", "Запись удалена"))
+                    .setNegativeClick(v -> dialog.dismiss());
+            dialog.show(manager, "myDialog");
         });
     }
 
