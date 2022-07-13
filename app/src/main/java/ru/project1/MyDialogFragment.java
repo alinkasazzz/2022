@@ -11,12 +11,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 import ru.project1.list.MyDialogFragmentBuilder;
 
 public class MyDialogFragment extends AppCompatDialogFragment implements MyDialogFragmentBuilder {
 
     private final String title;
     private View.OnClickListener onPositiveClick, onNegativeClick;
+
+    public TextInputEditText editText;
 
     public MyDialogFragment(String title) {
         this.title = title;
@@ -41,6 +45,7 @@ public class MyDialogFragment extends AppCompatDialogFragment implements MyDialo
         View view = requireActivity().getLayoutInflater().inflate(R.layout.fragment_add, null);
         view.findViewById(R.id.button_ok).setOnClickListener(onPositiveClick);
         view.findViewById(R.id.button_cancel).setOnClickListener(onNegativeClick);
+        editText = view.findViewById(R.id.myText);
         return builder.setTitle(title).setView(view).create();
     }
 }
