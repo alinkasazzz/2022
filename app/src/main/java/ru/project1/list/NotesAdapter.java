@@ -20,8 +20,8 @@ import ru.project1.R;
  */
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder> {
 
-    private List<String> notes;
-    private LayoutInflater inflater;
+    private final List<String> notes;
+    private final LayoutInflater inflater;
 
     public NotesAdapter(Context context, List<String> notes) {
         this.inflater = LayoutInflater.from(context);
@@ -49,8 +49,12 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
     public void addToNotes(String note) {
         notes.add(note);
     }
+    public void deleteNote(String note) {
 
-   class MyViewHolder extends RecyclerView.ViewHolder {
+        notes.remove(note);
+    }
+
+   static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
 
         public MyViewHolder(@NonNull View itemView) {
